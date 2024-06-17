@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    behavior: smooth;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-image: url(image/Layer\ 0.png);
+    position: relative;
+}
+.logo{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 160px;
+    width: 1000px;
+    animation: scrollLeft 2s linear 1;
+}
+@keyframes scrollLeft {
+    from{
+        left: -900px;
+    }
+    to{
+        left: 160px;
+    }
+}
+.robot{
+    position: absolute;
+    top: 53%;
+    transform: translateY(-50%);
+    right: 180px;
+    width: 500px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 9999;
+    transform: all 0.4 linear;
+}
+.activeRobot{
+    animation: robot 4s linear infinite;
+}
+@keyframes robot {
+    25%,50%{
+        top: 48%;
+        right: 180px;
+    }
+    75%,100%{
+        top: 53%;
+        right: 180px;
+    }
+}
+.shadow{
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    right: 400px;
+    opacity: 0;
+    width: 200px;
+    transform: all 0.4 linear;
+    cursor: pointer;
+}
+.activeShadow{
+    animation: shadow 4s linear infinite;
+}
+@keyframes shadow {
+    25%,50%{
+        top: 75%;
+        right: 400px;
+        width: 400px;
+    }
+    75%,100%{
+        top: 65%;
+        right: 400px;
+        width: 200px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="image/Logo.png" class="logo" alt="">
+        <img src="image/Shadow.png" class="robot" alt="">
+        <img src="image/Robot Shadow.png" class="shadow" alt="">
+    </div>
+    <div class="container"></div>
+
+    <script>
+        setTimeout((e) => {
+    // console.log(e);
+    document.querySelector('.robot').style.opacity='0.3';
+    document.querySelector('.shadow').style.opacity='0.3';
+
+}, 1600);
+setTimeout((e) => {
+    // console.log(e);
+    document.querySelector('.robot').style.opacity='0.8';
+    document.querySelector('.shadow').style.opacity='0.8';
+
+}, 1800);
+setTimeout((e) => {
+    // console.log(e);
+    document.querySelector('.robot').style.opacity='1';
+    document.querySelector('.shadow').style.opacity='1';
+    document.querySelector('.robot').classList.add('activeRobot');
+    document.querySelector('.shadow').classList.add('activeShadow');
+}, 2000);
+
+window.addEventListener('scroll',(e)=>{
+    console.log(window.scrollY);
+    document.querySelector('.logo').style.left=160+0.4*window.scrollY+'px';
+})
+window.addEventListener('mousemove',(e)=>{
+    console.log(e.clientX,e.clientY);
+})
+document.querySelector('.robot').addEventListener('mouseenter',()=>{
+    document.querySelector('.robot').classList.remove('activeRobot');
+    document.querySelector('.shadow').classList.remove('activeShadow');
+})
+document.querySelector('.robot').addEventListener('mouseleave',()=>{
+    document.querySelector('.robot').classList.add('activeRobot');
+    document.querySelector('.shadow').classList.add('activeShadow');
+})
+    </script>
+</body>
+</html>
