@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination with jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<div id="itemContainer"></div>
+<button id="prevButton">Previous</button>
+<button class="indexButton" data-index="1" style="display: none;">1</button>
+<button class="indexButton" data-index="2" style="display: none;">2</button>
+<button class="indexButton" data-index="3" style="display: none;">3</button>
+<button class="indexButton" data-index="4" style="display: none;">4</button>
+<button class="indexButton" data-index="5" style="display: none;">5</button>
+<button class="indexButton" data-index="6" style="display: none;">6</button>
+<button id="nextButton">Next</button>
+<input type="text" id="indexInput" placeholder="Go to Page">
+<button id="customIndexButton">Go</button>
+
+<script>
+    $(document).ready(function () {
+        const allItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10',
+            'Item 11', 'Item 12', 'Item 13', 'Item 14', 'Item 15', 'Item 16', 'Item 17', 'Item 18', 'Item 19', 'Item 20',
+            'Item 21', 'Item 22', 'Item 23', 'Item 24', 'Item 25', 'Item 26', 'Item 27', 'Item 28', 'Item 29', 'Item 30'];
+
+        const itemsPerPage = 5;
+        let currentPage = 1;
+
+        const itemContainer = $('#itemContainer');
+        const prevButton = $('#prevButton');
+        const nextButton = $('#nextButton');
+        const indexButtons = $('.indexButton');
+        const indexInput = $('#indexInput');
+        const customIndexButton = $('#customIndexButton');
+
+        function showItemsOnPage(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, allItems.length);
+            // Clear previous items
+            itemContainer.empty();
+            // Display items for the current page
+            for (let i = startIndex; i < endIndex; i++) {
+                const itemElement = $('<div>').text(allItems[i]);
+                itemContainer.append(itemElement);
+            }
+            // Update UI elements
+            prevButton.prop('disabled', currentPage === 1);
+            nextButton.prop('disabled', currentPage === getTotalPages());
+
+            // Show/hide index buttons based on current page
+            indexButtons.each(function (index) {
+                const buttonPage = index + 1;
+                // Display only three index buttons centered around the current page
+                let displayCondition = currentPage === 1
+                    ? (1 <= buttonPage && buttonPage <= 3)
+                    : (buttonPage >= currentPage - 1 && buttonPage <= currentPage + 1);
+                if (currentPage === 6) {
+                    displayCondition = currentPage === 6
+                        && (4 <= buttonPage && buttonPage <= 6);
+                }
+                $(this).css({display: displayCondition ? 'inline-block' : 'none'});
+            });
+        }
+
+        function prevButtonClick() {
+            if (currentPage > 1) {
+                currentPage--;
+                showItemsOnPage(currentPage);
+            }
+        }
+
+        function nextButtonClick() {
+            const totalPages = getTotalPages();
+            if (currentPage < totalPages) {
+                currentPage++;
+                showItemsOnPage(currentPage);
+            }
+        }
+
+        function indexButtonClick() {
+            const newIndex = parseInt($(this).data('index'));
+            currentPage = newIndex;
+            showItemsOnPage(currentPage);
+        }
+
+        function customIndexButtonClick() {
+            const newIndex = parseInt(indexInput.val());
+            if (newIndex >= 1 && newIndex <= getTotalPages()) {
+                currentPage = newIndex;
+                showItemsOnPage(currentPage);
+                indexInput.val('');
+            }
+        }
+
+        function getTotalPages() {
+            return Math.ceil(allItems.length / itemsPerPage);
+        }
+
+        // Attach event listeners
+        prevButton.on('click', prevButtonClick);
+        nextButton.on('click', nextButtonClick);
+        indexButtons.on('click', indexButtonClick);
+        customIndexButton.on('click', customIndexButtonClick);
+
+        showItemsOnPage(currentPage);
+    });
+</script>
+
+</body>
+</html>

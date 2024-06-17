@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+#itemContainer {
+    margin: 10px 0;
+}
+
+button {
+    margin: 5px;
+}

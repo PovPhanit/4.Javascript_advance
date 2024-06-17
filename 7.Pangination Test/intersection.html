@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      width: 100px;
+      height: 50px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-top: 30px;
+      border: 2px solid black;
+    }
+    .show {
+      animation-name: test;
+      animation-duration: 1s;
+      animation-iteration-count: 1;
+      animation-direction: reverse;
+    }
+    @keyframes test {
+      from {
+        transform: translateX(0%);
+      }
+      to {
+        transform: translateX(200%);
+      }
+    }
+    .mask{
+      /* -webkit-mask-image: linear-gradient(black 60% ,transparent); */
+      -webkit-mask-image:url(Untitled-1.png);
+      mask-size:cover;
+      mask-repeat:no-repeat;
+      mask-position: center;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <div class="box">Test Box</div>
+      <img class="mask" src="image3.jpg" alt="">
+    </div>
+    <script>
+      const box = document.querySelectorAll(".box");
+      const obser = new IntersectionObserver((entry) => {
+        console.log(entry);
+        for (let i = 0; i < entry.length; i++) {
+          if (entry[i].isIntersecting) {
+            // console.log(true);
+            entry[i].target.classList.add("show");
+          } else {
+            entry[i].target.classList.remove("show");
+          }
+          // entry[0].target.textContent="hello";
+        }
+      }, {
+        threshold: 0.56,
+        // rootMargin:"-100px",/
+      });
+      obser.observe(box[0]);
+      box.forEach((card) => {
+        obser.observe(card);
+      });
+    </script>
+  </body>
+</html>

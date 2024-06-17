@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Array Manipulation</title>
+</head>
+<body>
+
+<h2>Array Manipulation</h2>
+
+<p>Original Array: <span id="originalArray"></span></p>
+
+<button onclick="insertElement()">Insert Element</button>
+<button onclick="deleteElement()">Delete Element</button>
+<button onclick="updateElement()">Update Element</button>
+
+<script>
+// Initial array
+let myArray = [1, 2, 3, 4, 5];
+
+// Function to display array
+function displayArray() {
+    document.getElementById('originalArray').innerText = myArray.join(', ');
+}
+
+// Function to insert element
+function insertElement() {
+    let element = prompt('Enter the element to insert:');
+    myArray.push(element);
+    displayArray();
+}
+
+// Function to delete element
+function deleteElement() {
+    let index = prompt('Enter the index of element to delete (0 to ' + (myArray.length - 1) + '):');
+    index = parseInt(index);
+    if (!isNaN(index) && index >= 0 && index < myArray.length) {
+        myArray.splice(index, 1);
+        displayArray();
+    } else {
+        alert('Invalid index');
+    }
+}
+
+// Function to update element
+function updateElement() {
+    let index = prompt('Enter the index of element to update (0 to ' + (myArray.length - 1) + '):');
+    index = parseInt(index);
+    if (!isNaN(index) && index >= 0 && index < myArray.length) {
+        let newValue = prompt('Enter the new value:');
+        myArray[index] = newValue;
+        displayArray();
+    } else {
+        alert('Invalid index');
+    }
+}
+
+// Display initial array
+displayArray();
+</script>
+
+</body>
+</html>

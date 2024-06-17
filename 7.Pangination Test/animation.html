@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* @keyframes zoomInRight {
+      0% {
+        transform: scale(0.8) translateX(600%);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .zoomInRight {
+      animation-fill-mode: forwards;  
+      animation: zoomInRight 2s ease-in-out;
+    } */
+/* ======================================= */
+
+/* @keyframes zoomInLeft {
+  0% {
+    transform: scale(0) translateX(-600%);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+}
+
+.zoomInLeft {
+  animation: zoomInLeft 2s ease-in-out;
+} */
+/* ======================================= */
+/* @keyframes flip {
+  0% {
+    transform: rotateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform:rotateY(360deg);
+    opacity: 1;
+  }
+}
+
+.flip {
+  animation: flip 3s ease-in-out;
+} */
+/* ======================================= */
+/* @keyframes backInRight {
+  0% {
+    opacity: 0.9;
+    transform: translateX(150%);
+  }
+  80% {
+    transform: translateX(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.backInRight {
+  animation: backInRight 5s ease-in-out;
+} */
+/* ========================================== */
+/* @keyframes backInDown {
+  0% {
+    opacity: 0,9;
+    transform: translateY(-100%);
+  }
+  80% {
+    transform: translateY(40%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.backInDown {
+  animation: backInDown 5s ease-in-out;
+} */
+/* ================================= */
+/* @keyframes bounceInDown {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  40% {
+    transform: translateY(-50px);
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+  }
+  60% {
+    transform: translateY(50px);
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+  }
+  80% {
+    transform: translateY(-50px);
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+  }
+}
+
+.bounceInDown {
+  animation: bounceInDown 4s ease-in-out;
+} */
+/* ============================================= */
+/* @keyframes swing {
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.swing {
+  transform-origin: top center;
+  animation: swing 2s infinite;
+} */
+/* =========================================== */
+/* @keyframes rubberBand {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.25);
+  }
+  40% {
+    transform: scale(0.95);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.rubberBand {
+  animation: rubberBand 3s infinite;
+} */
+/* ======================================== */
+@keyframes flash {
+  0%{
+    opacity: 1;
+  }
+  25%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  75%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.flash {
+  animation: flash 1s infinite;
+}
+
+
+
+    /* Optional styles for demonstration */
+    body {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: cyan;
+    }
+
+    .animated-element {
+      /* width: 100px; */
+
+      height: 100px;
+      /* background-color: lightblue; */
+      color: white;
+      font-weight: bold;
+      font-size: 88px;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      /* Add other styles as needed */
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-element flash rubberBand zoomInRight zoomInLeft flip backInRight backInDown bounceInDown swing">Pov Phanit</div>
+  <div class="animated-element zoomInRight zoomInLeft" >Pov Phanit</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 style="color:blue;">Search</h1>
+    <div class="test">
+      <div class="container"></div>
+    </div>
+    <input class="search" value="" type="text" placeholder="search" />
+    <h1 style="color: blue;">Bookmarks</h1>
+    <div class="testclick"></div>
+    <h1 style="color: blue;">Show Bookmarks</h1>
+    <div class="showClick"></div>
+    <h1 style="color: blue;">Delete Element</h1>
+    <div class="showBeforeDelete"></div>
+    <h1 style="color: blue;">Update</h1>
+    <div class="showBeforeUpdate"></div>
+    <input type="text" placeholder="update..." class="update">
+    <script>
+      const convertMoney = [
+        {
+          name: "Phanit",
+          money: "899",
+          cur: "JPY",
+        },
+        {
+          name: "Makara",
+          money: "456",
+          cur: "GBP",
+        },
+        {
+          name: "Kry",
+          money: "839",
+          cur: "EUR",
+        },
+        {
+          name: "Long",
+          money: "967",
+          cur: "USD",
+        },
+      ];
+      const option = {
+        style: "currency",
+        currency: "USD",
+      };
+      const already = new Intl.NumberFormat("us-US", option).format(
+        convertMoney[0].money
+      );
+      console.log(already);
+      console.log(convertMoney);
+      const findHighMoney = convertMoney.filter((fil) => fil.money > 800);
+      console.log(findHighMoney);
+      // sort name
+      // const sortFindeHighMoney=findHighMoney.sort((a,b)=>b.name.localeCompare(a.name));
+      // sort money
+      const sortFindeHighMoney = findHighMoney.sort(
+        (a, b) => a.money - b.money
+      );
+      sortFindeHighMoney.forEach((convert) => {
+        const moneyUSD = new Intl.NumberFormat("us-US", {
+          style: "currency",
+          currency: convert.cur,
+        }).format(convert.money);
+        const hmtl = `<h1>${convert.name}</h1>
+        <p>${moneyUSD}</p>`;
+        const container = document.querySelector(".container");
+        console.log(container);
+        container.insertAdjacentHTML("afterbegin", hmtl);
+      });
+      // console.log(sortFindeHighMoney[0].name.includes('k'.toUpperCase()))
+
+      const search = document.querySelector(".search");
+      console.log(search);
+      //search
+      search.addEventListener("keyup", function (e) {
+        console.log(search.value);
+        const eeee = sortFindeHighMoney.filter((searching) => {
+          return searching.name
+            .toLowerCase()
+            .includes(search.value.toLocaleLowerCase());
+        });
+        console.log(eeee);
+        document.querySelector(".container").innerHTML = "";
+        eeee.forEach((push) => {
+          console.log(push);
+          const hmtl = `<h1>${push.name}</h1>
+        <p>${push.money}</p>`;
+          document
+            .querySelector(".container")
+            .insertAdjacentHTML("afterbegin", hmtl);
+        });
+        // console.log(sortFindeHighMoney[0].name.includes('K'))
+      });
+      //bookmark
+      const testClick = [
+        {
+          id: 1,
+          name: "seth",
+        },
+        {
+          id: 2,
+          name: "Phait",
+        },
+      ];
+      const bookMarks = [];
+      testClick.forEach((push) => {
+        const hmtl = `<h1>${push.name}</h1>
+        <p>${push.id}</p>`;
+        document
+          .querySelector(".testclick")
+          .insertAdjacentHTML("afterbegin", hmtl);
+      });
+      document.querySelector(".testclick").addEventListener("click", (e) => {
+        console.log(e.target.textContent);
+        const clearDuplicate = bookMarks.some((duplicate) => {
+          return (
+            duplicate.name == e.target.textContent ||
+            duplicate.id == e.target.textContent
+          );
+        });
+        if (clearDuplicate) return;
+        const click = testClick.filter((fil) => {
+          return (
+            fil.name == e.target.textContent || fil.id == e.target.textContent
+          );
+        });
+        console.log(click);
+        bookMarks.push(...click);
+        console.log(bookMarks);
+        document.querySelector(".showClick").innerHTML = "";
+        bookMarks.forEach((push) => {
+          const hmtl = `<h1>${push.name}</h1>
+        <p>${push.id}</p>`;
+          document
+            .querySelector(".showClick")
+            .insertAdjacentHTML("afterbegin", hmtl);
+        });
+      });
+
+      //Delete
+      let showBeforeDelete = [
+      {
+          id: 1,
+          name: "seth",
+        },
+        {
+          id: 2,
+          name: "Phait",
+        },
+        {
+          id: 3,
+          name: "Long",
+        },
+      ];
+        showBeforeDelete.forEach((show)=>{
+          const hmtl = `<h1>${show.name}</h1>
+        <p>${show.id}</p>`;
+          document.querySelector('.showBeforeDelete').insertAdjacentHTML('afterbegin',hmtl);
+        })
+
+        document.querySelector('.showBeforeDelete').addEventListener('click',(e)=>{
+          console.log(e.target.textContent);
+          const deleteEle=showBeforeDelete.filter((deletes)=>{
+            return deletes.name!==e.target.textContent && deletes.id!=e.target.textContent ;
+          })
+          console.log(deleteEle)
+          showBeforeDelete=deleteEle;
+          document.querySelector('.showBeforeDelete').innerHTML='';
+          showBeforeDelete.forEach((show)=>{
+              const hmtl = `<h1>${show.name}</h1>
+                            <p>${show.id}</p>`;
+              document.querySelector('.showBeforeDelete').insertAdjacentHTML('afterbegin',hmtl);
+            })
+        })
+
+
+        //Update
+      let showBeforeUpdate = [
+      {
+          id: 13,
+          name: "seth",
+        },
+        {
+          id: 27,
+          name: "Phait",
+        },
+        {
+          id: 31,
+          name: "Long",
+        },
+      ];
+      showBeforeUpdate.forEach((show)=>{
+          const hmtl = `<h1>${show.name}</h1>
+        <p>${show.id}</p>`;
+          document.querySelector('.showBeforeUpdate').insertAdjacentHTML('afterbegin',hmtl);
+        })
+        let updateEl=[];
+        document.querySelector('.showBeforeUpdate').addEventListener('click',(ep)=>{
+           updateEl=showBeforeUpdate.filter((fil)=>fil.name==ep.target.textContent || fil.id==ep.target.textContent)
+          document.querySelector('.update').addEventListener('keyup',(e)=>{
+            if(e.code=='Enter'){
+              e.target.value='';
+              console.log(true);
+              updateEl=[];
+              return;
+            }
+            showBeforeUpdate.forEach((update)=>{
+              if(update.id==updateEl[0].id){
+                update.name=String(e.target.value);
+              }
+            })
+            document.querySelector('.showBeforeUpdate').innerHTML='';
+            showBeforeUpdate.forEach((show)=>{
+                const hmtl = `<h1>${show.name}</h1>
+                              <p>${show.id}</p>`;
+                document.querySelector('.showBeforeUpdate').insertAdjacentHTML('afterbegin',hmtl);
+              })
+          })
+        })
+
+        
+      // const date = new Date();
+      // console.log(date);
+      // const all = new Intl.DateTimeFormat("us-US", {
+      //   weekday: "long",
+      //   year: "numeric",
+      //   month: "long",
+      //   day: "numeric",
+      // }).format(date);
+      // console.log(all);
+    </script>
+  </body>
+</html>

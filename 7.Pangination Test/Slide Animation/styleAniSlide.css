@@ -1,0 +1,50 @@
+/* general styles */
+:root {
+    --clr-neutral-100: hsl(0, 0%, 100%);
+    --clr-primary-100: hsl(205, 15%, 58%);
+    --clr-primary-400: hsl(215, 25%, 27%);
+    --clr-primary-800: hsl(217, 33%, 17%);
+    --clr-primary-900: hsl(218, 33%, 9%);
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    display: grid;
+    min-block-size: 100vh;
+    place-content: center;
+    font-family: system-ui;
+    font-size: 1.125rem;
+    background-color: var(--clr-primary-800);
+  }
+
+  /* ==================================== */
+
+/* ==================================== */
+ .scroller {
+     width: 600px;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(90deg,transparent,white 20%,white 80%,transparent);
+  }  
+ .scroller__inner {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    border: 5px solid lime;
+    animation: scroll 20s linear infinite;
+    padding-block: 1rem;
+    padding-inline: 0;
+    width: max-content;
+  }
+    .scroller .scroller__inner li {
+    padding: 1rem;
+    background: var(--clr-primary-400);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem -0.25rem var(--clr-primary-900);
+  }
+     
+  @keyframes scroll {
+    to {
+      transform: translate(-50%);
+    }
+  } 
